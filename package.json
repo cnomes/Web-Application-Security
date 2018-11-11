@@ -7,8 +7,10 @@
   "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
-    "start": "grunt serve",
-    "build": "grunt"
+    "start": "concurrently \"npm run serve\" \"npm run start:server\"",
+    "serve": "grunt serve",
+    "build": "grunt",
+    "start:server": "nodemon --inspect ./BE/bad-backend.js"
   },
   "author": {
     "name": "Hakim El Hattab",
@@ -23,6 +25,7 @@
     "node": ">=4.0.0"
   },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "express": "^4.16.2",
     "grunt": "^1.0.1",
     "grunt-autoprefixer": "^3.0.4",
@@ -33,11 +36,16 @@
     "grunt-contrib-qunit": "^2.0.0",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-sass": "^2.0.0",
     "grunt-retire": "^1.0.7",
+    "grunt-sass": "^2.0.0",
     "grunt-zip": "~0.17.1",
     "mustache": "^2.3.0",
+    "nodemon": "^1.18.4",
     "socket.io": "^1.7.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "alasql": "^0.4.11",
+    "cors": "^2.8.4"
+  }
 }

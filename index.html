@@ -1,49 +1,718 @@
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+        <title>WAS</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+        <!--Custom css-->
+        <link rel="stylesheet" href="css/style.css"/>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+        <!-- Printing and PDF exports -->
+        <script>
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.type = 'text/css';
+          link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+          document.getElementsByTagName('head')[0].appendChild(link);
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h2>Web application security</h2>
+                </section>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+                <section>
+                    <h2>Overview</h2>
+                    <ul>
+                        <li>Intro</li>
+                        <li>
+                            OWASP Top 10
+                            <ul>
+                                <li>Risk</li>
+                                <li>Example</li>
+                                <li>Demo</li>
+                            </ul>
+                        </li>
+                        <li>Best practises</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section data-background-image="img/hack_the_planet.gif">
+                        <aside class="notes">
+                            <a href="https://www.imdb.com/title/tt0113243/"
+                               target="_blank"
+                               rel="noopener">
+                                Hackers (1995)
+                            </a>
+
+                            <h1>Cost</h1>
+                            <a href="https://databreachcalculator.mybluemix.net/assets/2018_Global_Cost_of_a_Data_Breach_Report.pdf"
+                               target="_blank"
+                               rel="noopener">
+                                2018 Global Cost of a Data Breach Report
+                            </a>
+                            <ul>
+                                <li>Study from IBM in 2018 (477 companies).</li>
+                                <li>Most likely: South Africa (43%)</li>
+                                <li>Least likely: Germany (14.3%)</li>
+                                <li>Cost factors:
+                                    <ul>
+                                        <li>Detection and escalation</li>
+                                        <li>Notification costs</li>
+                                        <li>Post data breach response</li>
+                                        <li>Lost business cost</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <h2>Detection and escalation:</h2>
+                            <ul>
+                                <li>Forensic and investigative activities</li>
+                                <li>Assessment and audit services</li>
+                                <li>Crisis team management</li>
+                                <li>Communications to executive management and board of directors</li>
+                            </ul>
+
+                            <h2>Post data breach response:</h2>
+                            <ul>
+                                <li>Help desk activities/inbound communications</li>
+                                <li>Credit report monitoring and identity protection services</li>
+                                <li>Issuing new accounts or credit cards</li>
+                                <li>Legal expenditures</li>
+                                <li>Product discounts</li>
+                                <li>Regulatory interventions (fines)</li>
+                            </ul>
+
+                            <h2>Notification costs:</h2>
+                            <ul>
+                                <li>Emails, letters, outbound telephone calls, or general notice that personal
+                                    information was lost or stolen
+                                </li>
+                                <li>Communication with regulators; determination of all regulatory requirements,
+                                    engagement of outside experts
+                                </li>
+                            </ul>
+
+                            <h2>Lost business cost:</h2>
+                            <ul>
+                                <li>Cost of business disruption and revenue losses from system downtime</li>
+                                <li>Cost of lost customers and acquiring new customers</li>
+                                <li>Reputation losses and diminished goodwill</li>
+                            </ul>
+
+                            <h1>Hacks</h1>
+                            <p>Yahoo: place 1 & 2 for most stolen records</p>
+                        </aside>
+
+                        <a class="fragment fade-down"
+                           href="https://databreachcalculator.mybluemix.net/thankyou/explore"
+                           target="_blank"
+                           rel="noopener">
+                            <div>&plusmn; €3.3 Million in 2018</div>
+                            <div>&plusmn; €130 / record</div>
+                        </a>
+
+                        <br>
+
+                        <ul class="fragment fade-up">
+                            <li>
+                                Facebook
+                                (<a href="https://techcrunch.com/2018/09/28/everything-you-need-to-know-about-facebooks-data-breach-affecting-50m-users/?guccounter=1"
+                                    target="_blank"
+                                    rel="noopener">50.000 in 2018</a>)
+                            </li>
+                            <li>
+                                Yahoo
+                                (<a href="https://www.theverge.com/2017/10/3/16414306/yahoo-security-data-breach-3-billion-verizon"
+                                    target="_blank"
+                                    rel="noopener">3.000.000.000 2013</a>
+                                & <a href="https://www.vox.com/world/2017/3/15/14934428/yahoo-russia-indictments"
+                                     target="_blank"
+                                     rel="noopener">500.000.000 in 2014</a>)
+                            </li>
+                            <li>
+                                Ashley Madison
+                                (<a href="https://en.wikipedia.org/wiki/Ashley_Madison_data_breach"
+                                    target="_blank"
+                                    rel="noopener">32.000.000 in 2015</a>)
+                            </li>
+                            <li>
+                                <a href="https://breachlevelindex.com/" target="_blank" rel="noopener">
+                                    &gt; 13.443.000.000 since 2013</a>
+                            </li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section data-background="img/owasp_logo_flat2_icon.png"
+                         data-background-color="#243F81"
+                         data-background-size="contain">
+                    <aside class="notes">
+                        list of <strong>risks</strong>
+
+                        <h1><a href="https://www.owasp.org/index.php/Top_10-2017_Top_10">Top 10</a></h1>
+                        <ul>
+                            <li>A1:2017 - Injection</li>
+                            <li>A2:2017 - Broken Authentication</li>
+                            <li>A3:2017 - Sensitive Data Exposure</li>
+                            <li>A4:2017 - XML External Entities (XXE)</li>
+                            <li>A5:2017 - Broken Access Control</li>
+                            <li>A6:2017 - Security Misconfiguration</li>
+                            <li>A7:2017 - Cross-Site Scripting (XSS)</li>
+                            <li>A8:2017 - Insecure Deserialization</li>
+                            <li>A9:2017 - Using Components with Known Vulnerabilities</li>
+                            <li>A10:2017 - Insufficient Logging & Monitoring</li>
+                        </ul>
+                    </aside>
+
+                    <h2 class="owasp-outline fragment fade-down">OWASP</h2>
+                    <ul class="fragment fade-right owasp-outline">
+                        <li>
+                            <h3>
+                                <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project"
+                                   target="_blank"
+                                   rel="noreferrer noopener">Top 10</a>
+                            </h3>
+                            <ul>
+                                <li>A1: Injection</li>
+                                <li>A2: Broken Authentication</li>
+                                <li>A3: Sensitive data exposure</li>
+                                <li>A5: Broken Access Control</li>
+                                <li>A7: Cross-Site Scripting (XSS)</li>
+                                <li>A9: Using Components With Known Vulnerabilities</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <aside class="notes">
+                            <ul>
+                                <li>SQL</li>
+                                <li>LDAP</li>
+                                <li>XPath</li>
+                                <li>NoSQL queries</li>
+                                <li>OS commands</li>
+                                <li>XML parsers</li>
+                                <li>SMTP headers</li>
+                                <li>expression languages</li>
+                                <li>ORM queries</li>
+                            </ul>
+
+                            Use ORM frameworks (Hibernate, Entity, ...) but don't trust them blindly.
+                        </aside>
+
+                        <h2>A1: Injection</h2>
+
+                        <p>Exploitability: 🔥🔥🔥</p>
+                        <p>Prevalence: 🔥🔥</p>
+                        <p>Detectability: 🔥🔥🔥</p>
+                        <p>Technical: 🔥🔥🔥</p>
+
+                        <a href="https://xkcd.com/327/"
+                           target="_blank"
+                           rel="noopener norefferer">
+                            <img src="img/exploits_of_a_mom.png" alt="xkcd">
+                        </a>
+                    </section>
+
+                    <section>
+                        <aside class="notes">
+                            <i>a"; select * from secrets where "1"="1</i>
+                        </aside>
+
+                        <h4>Example</h4>
+
+                        <pre><code class="hljs JavaScript" data-trim>
+app.get("/posts/:id", function (req, res) {
+  const id = req.params.id;
+  const query = `SELECT * FROM posts WHERE id = "${id}"`;
+  const result = database.exec(query);
+  res.send(result);
+});
+                    </code></pre>
+
+                        <div class="search-wrapper">
+                            <span class="search">
+                                <label for="sqli-input">Find post:</label>
+                                <input id="sqli-input" type="text" placeholder="ID"/>
+                                <button onclick={searchPostsSQLI()}>Search</button>
+                            </span>
+                            <div class="results" id="sqli-result"></div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <aside class="notes">
+                            <i>a"; select * from secrets where "1"="1</i>
+
+                            <a href="https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet"
+                               target="_blank"
+                               rel="noopener">Cheat sheet</a>
+
+                            <ol>
+                                <li>Prepared statements</li>
+                                <li>Stored procedures</li>
+                                <li>White List Input Validation</li>
+                                <li>Escaping All User-Supplied Input</li>
+                            </ol>
+                        </aside>
+
+                        <h4>Solution</h4>
+
+                        <b>Prepared Statements</b>
+
+                        <pre><code class="hljs JavaScript" data-trim>
+const query = alasql.compile('SELECT * FROM posts WHERE id = ?', 'posts');
+app.get("/posts/fixed/:id", function (req, res) {
+  const id = req.params.id;
+  const result = query([id]);
+  res.send(result);
+});
+                        </code></pre>
+
+                        <div class="search-wrapper">
+                            <span class="search">
+                                <label for="no-sqli-input">Find post:</label>
+                                <input id="no-sqli-input" type="text" placeholder="ID"/>
+                                <button onclick={searchPostsNoSQLI()}>Search</button>
+                            </span>
+                            <div class="results" id="no-sqli-result"></div>
+                        </div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>A2: Broken Authentication</h2>
+
+                        <p><span>Exploitability:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Prevalence:</span><span>🔥🔥</span></p>
+                        <p><span>Detectability:</span><span>🔥🔥</span></p>
+                        <p><span>Technical:</span><span>🔥🔥🔥</span></p>
+                    </section>
+
+                    <section>
+                        <aside class="notes">
+                            <a href="https://www.owasp.org/index.php/Credential_stuffing"
+                               target="_blank"
+                               rel="noopener">Credential stuffing</a>
+                        </aside>
+
+                        <ul>
+                            <li>Credential stuffing (
+                                <a href="https://haveibeenpwned.com/"
+                                   target="_blank"
+                                   rel="noopener">';--have i been pwned?</a>
+                                )
+                            </li>
+                            <li>Brute force</li>
+                            <li>Weak passwords (admin/admin)</li>
+                            <li>Weak recovery (first pet, etc.)</li>
+                            <li>Not rotating session ids</li>
+                            <li>Not invalidating session ids</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <img src="img/NIST_logo.png"
+                             alt="nist"
+                             style="border: none; background-color: transparent">
+
+                        <h5>
+                            <a href="https://pages.nist.gov/800-63-3/sp800-63b.html#memsecret"
+                               target="_blank"
+                               rel="noopener norefferer">
+                                Password suggestions
+                            </a>
+                        </h5>
+
+                        <div class="long-list">
+                            <ul>
+                                <li><b>Multi-factor authentication</b></li>
+                                <li><b>Salt and hash</b></li>
+                                <li><b>Rate limiter (delay or block)</b></li>
+                                <li><b>Via secure channel</b></li>
+                                <li>8 to +64 characters (ASCII or UTF)</li>
+                                <li>No hints</li>
+                                <li>
+                                    Do not allow weak passwords
+                                    <ul>
+                                        <li>breached passwords</li>
+                                        <li>dictionary words</li>
+                                        <li>repetitive passwords (aaaa1234, ...)</li>
+                                        <li>context-specific words</li>
+                                    </ul>
+                                </li>
+                                <li>Password strength meter</li>
+                                <li>No composition rules</li>
+                                <li>No periodic changes</li>
+                                <li>Change when compromised</li>
+                            </ul>
+                        </div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <aside class="notes">
+                            Sensitive data (to identify):
+                            <ul>
+                                <li>Unnecessary storage</li>
+                                <li>Over HTTP, SMTP, FTP (clear text)</li>
+                                <li>Saved as clear text</li>
+                                <li>Weak crypto (MD4, MD5, RC4, RC2, DES, Blowfish, SHA-1, ECB)</li>
+                                <li>Weak keys (java.security.SecureRandom > java.util.Random)</li>
+                            </ul>
+                        </aside>
+
+                        <h2>A3: Sensitive data exposure</h2>
+
+                        <p><span>Exploitability:</span><span>🔥🔥</span></p>
+                        <p><span>Prevalence:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Detectability:</span><span>🔥🔥</span></p>
+                        <p><span>Technical:</span><span>🔥🔥🔥</span></p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <aside class="notes">
+                            bv. http://api.be/resource => http://api.be/resource/admin
+
+                            <ul>
+                                <li>Server side</li>
+                                <li>Deny by default</li>
+                                <li>Log</li>
+                                <li>CORS (Cross-Origin Resource Sharing) misconfiguration</li>
+                            </ul>
+                        </aside>
+
+                        <h2>A5: Broken Access Control</h2>
+
+                        <p><span>Exploitability:</span><span>🔥🔥</span></p>
+                        <p><span>Prevalence:</span><span>🔥🔥</span></p>
+                        <p><span>Detectability:</span><span>🔥🔥</span></p>
+                        <p><span>Technical:</span><span>🔥🔥🔥</span></p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <aside class="notes">
+                            <ul>
+                                <li>Reflected XSS</li>
+                                <li>Stored XSS</li>
+                                <li>DOM XSS</li>
+                            </ul>
+                        </aside>
+
+                        <h2>A7: Cross-Site Scripting</h2>
+
+                        <p><span>Exploitability:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Prevalence:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Detectability:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Technical:</span><span>🔥🔥</span></p>
+                    </section>
+
+                    <section>
+                        <aside class="notes">
+                            <i>&lt;img onerror=alert("DOH!") src/&gt;</i>
+                        </aside>
+
+                        <h2 onclick="resetComments('xss')()">Example</h2>
+
+                        <pre><code class="hljs JavaScript" data-trim>
+const renderComments = (comments = []) => {
+    const list = document.getElementById('comments-list');
+    list.innerHTML = comments.map(comment => `<li>${comment}</li>`).join('');
+};
+                    </code></pre>
+
+                        <div class="comments-wrapper">
+                            <div class="comments-container" id="xss-comments-container">
+                                <ul id="comments-list"></ul>
+                            </div>
+                            <div class="comment">
+                                <input id="xss-comment-input"
+                                       type="text"
+                                       placeholder="Your comment"
+                                       onkeydown="if(event.keyCode === 13) document.getElementById('xss-post-comment-button').click()"/>
+                                <button id="xss-post-comment-button" onclick="postComment()">Post</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <aside class="notes">
+                            <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet"
+                               target="_blank"
+                               rel="noopener">cheat sheet</a>
+                            <ul>
+                                <li>Escape untrusted data in HTML, JS, CSS, JSON</li>
+                                <li>Implement Content Security Policy</li>
+                                <li>Use auto escaping template system (angular, react, ...)</li>
+                            </ul>
+                        </aside>
+
+                        <h2>
+                            <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet"
+                               target="_blank"
+                               rel="noopener">Solution</a>
+                        </h2>
+
+                        <h5>Escape untrusted data</h5>
+
+                        <pre><code class="hljs JavaScript" data-trim>
+const renderCommentsFixed = (comments = []) => {
+    const list = document.getElementById('no-xss-comments-list');
+    while (list.firstChild) list.removeChild(list.firstChild);
+    comments.forEach(comment => {
+        const listItem = document.createElement('li');
+        listItem.textContent = comment;
+        list.appendChild(listItem);
+    });
+};
+                   </code></pre>
+                    </section>
+
+                    <section>
+                        <aside class="notes">
+                            <p>&lt;img onerror=alert("DOH!") src/&gt;</p>
+                        </aside>
+
+                        <h2 onclick="resetComments('no-xss')()">Solution</h2>
+
+                        <div class="comments-wrapper">
+                            <div class="comments-container" id="no-xss-comments-container" style="height: 500px">
+                                <ul id="no-xss-comments-list"></ul>
+                            </div>
+                            <div class="comment">
+                                <input id="no-xss-comment-input"
+                                       type="text"
+                                       placeholder="Your comment"
+                                       onkeydown="if(event.keyCode === 13) document.getElementById('no-xss-post-comment-button').click()"/>
+                                <button id="no-xss-post-comment-button" onclick="postCommentFixed()">Post</button>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <aside class="notes">
+                            <ul>
+                                <li>Remove unused dependencies/features/documentation</li>
+                                <li>Obtain resources from official sources</li>
+                            </ul>
+
+                            github feature
+
+                            Heartbleed (2014)
+                        </aside>
+
+                        <h2>A9: Using components with known vulnerabilities</h2>
+
+                        <p><span>Exploitability:</span><span>🔥🔥</span></p>
+                        <p><span>Prevalence:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Detectability:</span><span>🔥🔥</span></p>
+                        <p><span>Technical:</span><span>🔥🔥</span></p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <aside class="notes">
+                            <ul>
+                                <li>
+                                    log access
+                                    <a href="https://www.zdnet.com/article/github-says-bug-exposed-account-passwords/"
+                                       target="_blank"
+                                       rel="noopener">
+                                        no passwords
+                                    </a>
+                                </li>
+                                <li>centralize logging</li>
+                                <li>Alert</li>
+                            </ul>
+                        </aside>
+
+                        <h2>A10: Insufficient Logging & Monitoring</h2>
+
+                        <p><span>Exploitability:</span><span>🔥🔥</span></p>
+                        <p><span>Prevalence:</span><span>🔥🔥🔥</span></p>
+                        <p><span>Detectability:</span><span>🔥</span></p>
+                        <p><span>Technical:</span><span>🔥🔥</span></p>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Best practices</h2>
+
+                    <ul>
+                        <li class="fragment fade-up">Keep up to date</li>
+                        <li class="fragment fade-up">Keep updating</li>
+                        <li class="fragment fade-up">Principle of least privilege</li>
+                        <li class="fragment fade-up">Focus on priority vulnerabilities</li>
+                        <li class="fragment fade-up">Think about what you are writing</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <aside class="notes">
+                        Fin
+                    </aside>
+                </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+          // Reveal
+          Reveal.initialize({
+            history: true,
+            fragmentInURL: true,
+            dependencies: [
+              { src: 'plugin/markdown/marked.js' },
+              { src: 'plugin/markdown/markdown.js' },
+              { src: 'plugin/notes/notes.js', async: true },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: () => hljs.initHighlightingOnLoad() }
+            ]
+          });
+
+          // SQL injection
+          const searchPostsSQLI = async () => {
+            const { value } = document.getElementById("sqli-input");
+            const response = await fetch(`http://localhost:8080/posts/${value}`);
+            const posts = await response.json();
+
+            const el = document.getElementById('sqli-result');
+
+            if (posts.length <= 0) {
+              el.innerHTML = `<div>Post not found</div>`;
+            } else {
+              el.innerHTML = posts.map((post) => (post.user && post.text) ? `<div><b>${post.user || ''}:</b> ${post.text}</div>` : JSON.stringify(post));
+            }
+          };
+
+          const searchPostsNoSQLI = async () => {
+            const { value } = document.getElementById("no-sqli-input");
+            const response = await fetch(`http://localhost:8080/posts/fixed/${value}`);
+            const posts = await response.json();
+
+            const el = document.getElementById('no-sqli-result');
+
+            if (posts.length <= 0) {
+              el.innerHTML = `<div>Post not found</div>`;
+            } else {
+              el.innerHTML = posts.map((post) => (post.user && post.text) ? `<div><b>${post.user || ''}:</b> ${post.text}</div>` : JSON.stringify(post));
+            }
+          };
+
+          // XSS
+          const DEFAULT_COMMENTS = [
+            "I wish God were alive to see this.",
+            "Roads are just a suggestion Marge, just like pants.",
+            "Even communism works… in theory.",
+            "A sympathetic friend can be quite as dear as a brother.",
+            "Volunteering is for suckers. Did you know that volunteers don’t even get paid for the stuff they do?"
+          ];
+
+          const getComments = id => () => {
+            const commentsFromMemory = localStorage.getItem(`${id}-comments`);
+            if (commentsFromMemory) return JSON.parse(commentsFromMemory);
+
+            localStorage.setItem(`${id}-comments`, JSON.stringify(DEFAULT_COMMENTS));
+            return getComments(id)();
+          };
+
+          const addComment = id => comment => {
+            const comments = getComments(id)();
+            comments.push(comment);
+            localStorage.setItem(`${id}-comments`, JSON.stringify(comments));
+            return comments;
+          };
+
+          const clearComments = id => () => {
+            localStorage.removeItem(`${id}-comments`);
+          };
+
+          const renderComments = (comments = []) => {
+            const list = document.getElementById('comments-list');
+            list.innerHTML = comments.map(comment => `<li>${comment}</li>`).join('');
+          };
+
+          const renderCommentsFixed = (comments = []) => {
+            const list = document.getElementById('no-xss-comments-list');
+            while (list.firstChild) list.removeChild(list.firstChild);
+            comments.forEach(comment => {
+              const listItem = document.createElement('li');
+              listItem.textContent = comment;
+              list.appendChild(listItem);
+            });
+          };
+
+          const scrollCommentsToBottom = id => () => {
+            if (id === 'xss') {
+              const xssContainer = document.getElementById('xss-comments-container');
+              xssContainer.scrollTop = xssContainer.scrollHeight;
+            } else {
+              const noXssContainer = document.getElementById('no-xss-comments-container');
+              noXssContainer.scrollTop = noXssContainer.scrollHeight;
+            }
+          };
+
+          const resetComments = id => () => {
+            clearComments(id)();
+            const comments = getComments(id)();
+
+            if (id === 'xss')
+              renderComments(comments);
+            else
+              renderCommentsFixed(comments);
+
+            scrollCommentsToBottom(id)();
+          };
+
+          window.onload = () => {
+            renderComments(getComments('xss')());
+            renderCommentsFixed(getComments('no-xss')());
+
+            scrollCommentsToBottom('xss')();
+            scrollCommentsToBottom('no-xss')();
+          };
+
+          const postComment = () => {
+            const target = document.getElementById('xss-comment-input');
+            if (!target.value) return;
+            const comments = addComment('xss')(target.value);
+            renderComments(comments);
+            scrollCommentsToBottom('xss')();
+            target.value = "";
+          };
+
+          const postCommentFixed = () => {
+            const target = document.getElementById('no-xss-comment-input');
+            if (!target.value) return;
+            const comments = addComment('no-xss')(target.value);
+            renderCommentsFixed(comments);
+            scrollCommentsToBottom('no-xxs')();
+            target.value = "";
+          };
+        </script>
+    </body>
 </html>

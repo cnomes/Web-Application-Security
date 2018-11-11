@@ -1,0 +1,104 @@
+.owasp-outline,
+p.owasp-outline,
+h1.owasp-outline,
+h2.owasp-outline,
+h3.owasp-outline,
+h4.owasp-outline,
+h5.owasp-outline,
+h6.owasp-outline {
+    text-shadow: -1px 0 #231F20, 0 1px #231F20, 1px 0 #231F20, 0 -1px #231F20;
+}
+
+/* Presentation */
+.article-screenshots img {
+    max-height: 50px;
+}
+
+.long-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/*SQLI Search demo*/
+.search {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.search label {
+    margin-right: 10px;
+}
+
+.search input {
+    flex: 1;
+    background-color: #3f3f3f;
+    border: none;
+
+    padding: 5px;
+    font-size: 40px;
+    color: #dcdcdc;
+}
+
+.search button {
+    background-color: #3f3f3f;
+    border: none;
+    margin-left: 10px;
+
+    padding: 5px;
+    font-size: 40px;
+    color: #dcdcdc;
+}
+
+.search-wrapper .results {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    margin-top: 20px;
+    overflow: auto;
+    background-color: #3f3f3f;
+
+    text-align: left;
+    padding: 5px;
+    font-size: 40px;
+    color: #dcdcdc;
+}
+
+/*XSS comments*/
+.comments-wrapper .comments-container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 10px;
+    padding: 5px;
+    overflow: auto;
+
+    background-color: #3f3f3f;
+    text-align: left;
+}
+
+.comment {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+.comment input {
+    flex: 1;
+    background-color: #3f3f3f;
+    border: none;
+
+    padding: 5px;
+    font-size: 40px;
+    color: #dcdcdc;
+}
+
+.comment button {
+    background-color: #3f3f3f;
+    border: none;
+    margin-left: 10px;
+
+    padding: 5px;
+    font-size: 40px;
+    color: #dcdcdc;
+}

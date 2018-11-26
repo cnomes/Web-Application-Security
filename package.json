@@ -1,9 +1,7 @@
 {
-  "name": "reveal.js",
-  "version": "3.7.0",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://revealjs.com",
-  "subdomain": "revealjs",
+  "name": "web-application-security",
+  "version": "1.0",
+  "description": "Presentation about Web Application Security",
   "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
@@ -13,13 +11,12 @@
     "start:server": "nodemon --inspect ./BE/bad-backend.js"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
+    "name": "Carlo Nomes",
+    "email": "carlo.nomes@optis.be",
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/cnomes/Web-Application-Security.git"
   },
   "engines": {
     "node": ">=4.0.0"
